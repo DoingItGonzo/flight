@@ -2,13 +2,13 @@ package com.cooksys.entity;
 
 import java.util.ArrayList;
 
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import com.cooksys.pojo.Credentials;
-import com.cooksys.pojo.Profile;
 
 @Entity
 public class Client {
@@ -18,8 +18,6 @@ public class Client {
 	private long id;
 	
 	private Credentials credentials;
-	
-	private Profile profile;
 	
 	private ArrayList<Itinerary> itineraries;
 	
@@ -37,10 +35,6 @@ public class Client {
 		return id;
 	}
 
-	public Profile getProfile() {
-		return profile;
-	}
-
 	public ArrayList<Itinerary> getItineraries() {
 		return itineraries;
 	}
@@ -49,9 +43,6 @@ public class Client {
 		this.id = id;
 	}
 
-	public void setProfile(Profile profile) {
-		this.profile = profile;
-	}
 
 	public void setItineraries(ArrayList<Itinerary> itineraries) {
 		this.itineraries = itineraries;

@@ -2,6 +2,7 @@ import flightMap from './map/map.module'
 import apiUrl from './api.url'
 import appComponent from './app.component.js'
 import signInComponent from './signIn/signIn.module'
+import signUpComponent from './signUp/signUp.module'
 
 export default
   angular
@@ -13,7 +14,9 @@ export default
       'ui.router',
 
       flightMap,
-      signInComponent
+      signInComponent,
+      signUpComponent
+      
     ]).config(['$stateProvider', '$urlRouterProvider', function (stateProvider, urlRouter) {
 
       const signIn = {
