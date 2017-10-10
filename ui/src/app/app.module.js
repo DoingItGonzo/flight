@@ -31,10 +31,17 @@ export default
         component: 'signUpComponent'
     }
 
+    const mapState = {
+      name: 'mapState',
+      url: '/map',
+      component: 'flightMap'
+    }
+
     stateProvider.state(signIn)
     stateProvider.state(signUp)
+    stateProvider.state(mapState)
 
-    urlRouter.otherwise('/signIn')
+    urlRouter.otherwise('/map')
     }])
     .constant('apiUrl', apiUrl)
     .component('flightApp', appComponent)
