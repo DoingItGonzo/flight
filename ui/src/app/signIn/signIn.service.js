@@ -5,16 +5,16 @@ class SignInService {
         this.$http = $http
     }
 
-    validateLogin (username, credentials){
+    validateLogin = (username, credentials) => {
         return this.$http.post('http://localhost:8000/client/login/' + username, credentials)
     }
 
-    getAccount (username){
-        return this.$http.get('http://localhost:8000/client/account', username)
+    getAccount = (username) => {
+        return this.$http.get('http://localhost:8000/client/account/' + username)
     }
 
-    createAccount (account) {
-        return this.$http.post('http://localhost:8000/client/create', account)
+    createAccount = (client) => {
+        return this.$http.post('http://localhost:8000/client/create', client)
     }
 }
 

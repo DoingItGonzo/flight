@@ -17,20 +17,20 @@ public class Itinerary {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;
 	
-	private Integer totalFlightTime;
+	private long totalFlightTime;
 	
-	private Integer layoverTime;
+	private long layoverTime;
 	
 	@ManyToOne
 	private Client clientBooking;
 	
-	private ArrayList<Flight> flights;
+	private ArrayList<Flight> flights = new ArrayList<Flight>();
 
-	public Integer getTotalFlightTime() {
+	public long getTotalFlightTime() {
 		return totalFlightTime;
 	}
 
-	public Integer getLayoverTime() {
+	public long getLayoverTime() {
 		return layoverTime;
 	}
 
@@ -38,16 +38,38 @@ public class Itinerary {
 		return flights;
 	}
 
-	public void setTotalFlightTime(Integer totalFlightTime) {
+	public void setTotalFlightTime(long totalFlightTime) {
 		this.totalFlightTime = totalFlightTime;
 	}
 
-	public void setLayoverTime(Integer layoverTime) {
+	public void setLayoverTime(long layoverTime) {
 		this.layoverTime = layoverTime;
 	}
 
 	public void setFlights(ArrayList<Flight> flights) {
 		this.flights = flights;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + (int) (id ^ (id >>> 32));
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Itinerary other = (Itinerary) obj;
+		if (id != other.id)
+			return false;
+		return true;
 	}
 	
 	

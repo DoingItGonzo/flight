@@ -23,8 +23,8 @@ public class ClientController {
 		this.clientService = clientService;
 	}
 	
-	@GetMapping("account")
-	public Client getClient(@RequestBody String username) {
+	@GetMapping("account/{username}")
+	public Client getClient(@PathVariable String username) {
 		return clientService.getClient(username);
 	}
 	

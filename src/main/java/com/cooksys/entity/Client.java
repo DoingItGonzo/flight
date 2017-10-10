@@ -20,13 +20,10 @@ public class Client {
 	
 	private Credentials credentials;
 	
-	
 	@OneToMany(mappedBy="clientBooking")
 	private List<Itinerary> itineraries;
-	
-	
-	
 
+	
 	public Credentials getCredentials() {
 		return credentials;
 	}

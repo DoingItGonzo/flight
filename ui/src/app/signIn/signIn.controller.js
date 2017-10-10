@@ -4,11 +4,12 @@ import SignInService from './signIn.service.js'
 class SignInController {
     
         constructor(signInService, $state) {
-            this.signInService = SignInService
+            this.signInService = signInService
             this.state = $state
-            this.credentials = {}
-            this.credentials.username
-            this.credentials.password
+            this.client = {}
+            this.client.credentials = {}
+            this.client.credentials.username
+            this.client.credentials.password
         }
     
         signUp = () => {
@@ -16,23 +17,27 @@ class SignInController {
         }
     
         login = () => {
-            console.log(this.credentials.username)
-            this.signInService.validateLogin(this.credentials.username, this.credentials).then((done) => {
+            console.log(this.client.credentials.username)
+            this.signInService.validateLogin(this.client.credentials.username, this.client.credentials).then((done) => {
+                console.log(done.data)
                 if (done.data) {
-                    signInService.getAccount(this.credentials.username).then((done) => {
+                    this.signInService.getAccount(this.client.credentials.username).then((done) => {
                         console.log(done.data.credentials.username)
-                        this.account = done.data
+                        this.client.credentials = done.data.credentials
+                        this.state.go('mapState')
                     })
                 }
                 console.log(done.data)
             })
         }
     
-        // create = () => {
-        //     this.signInService.createAccount(this.account).then((done) => {
-        //         console.log(done.data)
-        //     })
-        // }
+        create = () => {
+            console.log(this.client.credentials.username)
+            this.signInService.createAccount(this.client).then((done) => {
+                console.log(done.data)
+                this.state.go('mapState')
+            })
+        }
     
     }
 

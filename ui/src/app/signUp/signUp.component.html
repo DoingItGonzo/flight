@@ -1,15 +1,9 @@
 <div class="signUpPage">
-    <p><span class="settingsPageText">Username:</span><input type="text" size="20" ng-model="signInController.account.credentials.username"></input>
+    <p><span class="settingsPageText">Username:</span><input type="text" size="20" ng-model="signInController.client.credentials.username"></input>
     </p>
-    <p><span class="settingsPageText">Password:</span><input type="text" size="20" ng-model="signInController.account.credentials.password"></input>
+    <p><span class="settingsPageText">Password:</span><input type="text" size="20" ng-model="signInController.client.credentials.password"></input>
     </p>
-    <p><span class="settingsPageText">Email:</span><input type="text" size="20" ng-model="signInController.account.profile.email"></input>
-    </p>
-    <p><span class="settingsPageText">First Name:</span><input type="text" size="20" ng-model="signInController.account.profile.firstName"></input>
-    </p>
-    <p><span class="settingsPageText">Last Name:</span><input type="text" size="20" ng-model="signInController.account.profile.lastName"></input>
-    </p>
-    <button class= "btn btn-primary settingsUpdateButton" type="button" ng-click="signInController.createUser()">Sign Up</button>
+    <button class= "btn btn-primary settingsUpdateButton" type="button" ng-click="signInController.create()">Sign Up</button>
     <p ng-if=signInController.usernameTaken>Username Taken</p>
     <p ng-if=signInController.emailLeftBlank>Email Required</p>
     <p ng-if=signInController.accountCreationFailed>Failed To Create Account</p>

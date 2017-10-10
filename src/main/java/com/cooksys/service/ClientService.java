@@ -32,8 +32,19 @@ public class ClientService {
 		}
 	}
 
+//	public Boolean login(String username, Credentials credentials) {
+//		Client client = clientRepository.findByCredentialsUsername(username);
+//		if (client.getCredentials().getUsername().equals(credentials.getUsername()) && 
+//			client.getCredentials().getPassword().equals(credentials.getPassword()))
+//			return true;
+//		else
+//			return false;
+//	}
+	
 	public Client createAccount(Client client) {
-		return clientRepository.save(client);
+		Client newClient = new Client();
+		newClient.setCredentials(client.getCredentials());
+		return clientRepository.save(newClient);
 	}
 	
 }
