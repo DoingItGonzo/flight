@@ -1,12 +1,13 @@
 package com.cooksys.entity;
 
 import java.util.ArrayList;
+import java.util.List;
 
-import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 import com.cooksys.pojo.Credentials;
 
@@ -19,7 +20,10 @@ public class Client {
 	
 	private Credentials credentials;
 	
-	private ArrayList<Itinerary> itineraries;
+	
+	@OneToMany(mappedBy="clientBooking")
+	private List<Itinerary> itineraries;
+	
 	
 	
 
@@ -35,7 +39,7 @@ public class Client {
 		return id;
 	}
 
-	public ArrayList<Itinerary> getItineraries() {
+	public List<Itinerary> getItineraries() {
 		return itineraries;
 	}
 
@@ -44,7 +48,7 @@ public class Client {
 	}
 
 
-	public void setItineraries(ArrayList<Itinerary> itineraries) {
+	public void setItineraries(List<Itinerary> itineraries) {
 		this.itineraries = itineraries;
 	}
 

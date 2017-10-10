@@ -16,7 +16,7 @@ class SignInController {
         }
     
         login = () => {
-            console.log(name)
+            console.log(this.credentials.username)
             this.signInService.validateLogin(this.credentials.username, this.credentials).then((done) => {
                 if (done.data) {
                     signInService.getAccount(this.credentials.username).then((done) => {
