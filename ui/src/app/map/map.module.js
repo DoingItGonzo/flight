@@ -7,5 +7,5 @@ export default
     .module('flight.map', ['ngMap'])
     .constant('locations', mapLocations)
     .component('flightMap', mapComponent)
-    .service('$map', mapService)
+    .service('mapService', mapService)
     .name

@@ -16,10 +16,13 @@ import com.cooksys.service.LocationService;
 @RequestMapping("location")
 @CrossOrigin
 public class LocationController {
-	
-	@Autowired
+
 	private LocationService locationService;
 
+	LocationController(LocationService locationService) {
+		this.locationService = locationService;
+	}
+	
 	@RequestMapping
 	public List<Location> get() {
 		return locationService.getAll();

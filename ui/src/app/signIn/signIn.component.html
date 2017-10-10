@@ -1,0 +1,14 @@
+<div class="container">
+    <div class="panel panel-default">
+        <p>Username: <input type="text" size="20" ng-model="signInController.name"></input>
+        </p>
+        <p>Password: <input type="text" size="20" ng-model="signInController.pass"></input>
+        </p>
+        <div class="logInButtons">
+            <button class="btn signButton" ng-click="signInController.login()">Let's Tweet!</button>
+            <button class="btn signButton" ng-click="signInController.signUpPage()">Sign Up</button>
+
+            <p ng-if=$ctrl.failedSignIn>User not found</p>
+        </div>
+    </div>
+</div>

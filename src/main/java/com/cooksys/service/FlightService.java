@@ -12,8 +12,11 @@ import com.cooksys.pojo.Flight;
 @Service
 public class FlightService {
 
-	@Autowired
-	FlightGenerator generator;
+	private FlightGenerator generator;
+	
+	FlightService(FlightGenerator generator) {
+		this.generator = generator;
+	}
 
 	private ArrayList<Flight> flightList = new ArrayList<>();
 	
