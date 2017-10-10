@@ -40,6 +40,8 @@ public class ItineraryService {
 		return itineraryRepository.findById(id);
 	}
 
+	
+	//This should work, but when I check for the time, I also need to check 
 	public List<Itinerary> searchForItinerary(String departure, String destination) {
 		List<Itinerary> possibleRoutes = new ArrayList<Itinerary>();
 		ArrayList<Flight> departureFlights = new ArrayList<Flight>();
@@ -47,7 +49,8 @@ public class ItineraryService {
 
 		for (Flight flight : flightService.getDailyFlightList()) {
 			if (flight.getOrigin().equals(departure) && flight.getDestination().equals(destination))
-				possibleRoutes.add(singleFlightItinerary(flight));
+//				possibleRoutes.add(singleFlightItinerary(flight));
+				possibleRoutes.add(itineraryFactory(flight));
 			else {
 				if (flight.getOrigin().equals(departure))
 					departureFlights.add(flight);
@@ -64,46 +67,63 @@ public class ItineraryService {
 
 	public List<Itinerary> departureConnection(List<Flight> departureMatch, List<Flight> destinationMatch) {
 		ArrayList<Itinerary> allPossibleRoutes = new ArrayList<>();
-		ArrayList<Flight> itinerary = new ArrayList<>();
 		for (Flight origin : departureMatch) {
 			for (Flight destination : destinationMatch) {
 				if (origin.getDestination().equals(destination.getOrigin())) {
-					
-					itinerary.add(origin); itinerary.add(destination);
-					allPossibleRoutes.add(itineraryFactory(itinerary));
-					itinerary.clear();
+					allPossibleRoutes.add(itineraryFactory(origin, destination));
 				}
 				for (Flight flights : flightService.getDailyFlightList()) {
 					if (flights.getOrigin().equals(origin.getDestination())
 							&& flights.getDestination().equals(destination.getOrigin())) {
 						
-						itinerary.add(origin); itinerary.add(destination); itinerary.add(flights);
-						allPossibleRoutes.add(itineraryFactory(itinerary));
-						itinerary.clear();
+//						itinerary.add(origin); itinerary.add(destination); itinerary.add(flights);
+//						allPossibleRoutes.add(itineraryFactory(itinerary));
+//						itinerary.clear();
+						allPossibleRoutes.add(itineraryFactory(origin, flights, destination));
 					}
 				}
 			}
 		}
 		return allPossibleRoutes;
 	}
+	
+//	ArrayList<Itinerary> allPossibleRoutes = new ArrayList<>();
+//	ArrayList<Flight> itinerary = new ArrayList<>();
+//	for (Flight origin : departureMatch) {
+//		for (Flight destination : destinationMatch) {
+//			if (origin.getDestination().equals(destination.getOrigin())) {
+//				
+//				itinerary.add(origin); itinerary.add(destination);
+//				allPossibleRoutes.add(itineraryFactory(itinerary));
+//				itinerary.clear();
+//			}
+//			for (Flight flights : flightService.getDailyFlightList()) {
+//				if (flights.getOrigin().equals(origin.getDestination())
+//						&& flights.getDestination().equals(destination.getOrigin())) {
+//					
+//					itinerary.add(origin); itinerary.add(destination); itinerary.add(flights);
+//					allPossibleRoutes.add(itineraryFactory(itinerary));
+//					itinerary.clear();
+//				}
+//			}
 
-	public Itinerary singleFlightItinerary(Flight flight) {
-		Itinerary itinerary = new Itinerary();
-		itinerary.setTotalFlightTime(flight.getFlightTime());
-		itinerary.setLayoverTime(0);
-		itinerary.getFlights().add(flight);
-		return itinerary;
-	}
+//	public Itinerary singleFlightItinerary(Flight flight) {
+//		Itinerary itinerary = new Itinerary();
+//		itinerary.setTotalFlightTime(flight.getFlightTime());
+//		itinerary.setLayoverTime(0);
+//		itinerary.getFlights().add(flight);
+//		return itinerary;
+//	}
 
 
-//	public Itinerary itineraryFactory(Flight... flights) {
-	public Itinerary itineraryFactory(ArrayList<Flight> itineraryFlights) {
+	public Itinerary itineraryFactory(Flight... flights) {
+//	public Itinerary itineraryFactory(ArrayList<Flight> itineraryFlights) {
 		Itinerary itinerary = new Itinerary();
 		long itineraryFlightTime = 0;
 		long layover = 0;
 		long previousFlightArrivalTime = 0;
-		itineraryFlights.sort(Comparator.comparing(Flight::getOffset));
-		for (Flight flight : itineraryFlights) {
+//		itineraryFlights.sort(Comparator.comparing(Flight::getOffset));
+		for (Flight flight : flights) {
 			if (flight.getOffset() + flight.getFlightTime() < previousFlightArrivalTime)
 				return null;
 			else {
