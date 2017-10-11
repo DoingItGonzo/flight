@@ -7,28 +7,22 @@ class MapController {
   markers = []
   paths = []
 
-  constructor(mapService, locations) {
+  constructor(mapService) {
     this.mapService = mapService
 
-    // add markers from an angular constant
-    const { memphis, nashville, knoxville } = locations
-    const markers = [memphis, nashville, knoxville]
-
-    markers.forEach(marker => this.addMarker(marker))
-
-    // add paths manually
-    const paths = [
-      [memphis, nashville, '#CC0099'],
-      [nashville, knoxville, '#AA1100']
-    ]
-
-    paths.forEach(args => this.addPath(...args))
-
-    // add path from webservice
-    mapService.getMarkerByCityName('Chattanooga')
-      .then(chattanooga => {
-        this.addPath(knoxville, chattanooga, '#FF3388')
+    const paths = []
+    this.mapService.getLocations().then((done) => {
+      this.mapService.getFlights().then((donezo) => {
+        donezo.data.forEach(flight => {
+          done.data.forEach(place => {
+            if (String(flight.destination).toLowerCase() == String(place.city).toLowerCase()) flight.destination = place
+            if (String(flight.origin).toLowerCase() == String(place.city).toLowerCase()) flight.origin = place
+            this.addMarker(place)
+          })
+          this.addPath(flight.origin, flight.destination, '#CC0099')
+        })
       })
+    })
   }
 
   addMarker({ latitude, longitude }) {
@@ -46,7 +40,6 @@ class MapController {
       geodesic: true
     })
   }
-
 }
 
 export default {

@@ -11,11 +11,11 @@ class MapService {
       .then(result => result.data)
   }
   getFlights = () => {
-    return this.$http.get()
+    return this.$http.get(`${this.apiUrl}/flights`)
   }
 
-  getLocations = (departure, destination) => {
-    return this.$http.get('http://localhost:8000/location/all')
+  getLocations = () => {
+    return this.$http.get(`${this.apiUrl}/location/all`)
   }
 
 }
