@@ -3,6 +3,8 @@ import apiUrl from './api.url'
 import appComponent from './app.component.js'
 import signInComponent from './signIn/signIn.module'
 import signUpComponent from './signUp/signUp.module'
+import navBarComponent from './navBar/navBar.module'
+import searchComponent from './search/search.module'
 
 export default
   angular
@@ -15,33 +17,42 @@ export default
 
       flightMap,
       signInComponent,
-      signUpComponent
-      
+      signUpComponent,
+      navBarComponent,
+      searchComponent
+
     ]).config(['$stateProvider', '$urlRouterProvider', function (stateProvider, urlRouter) {
 
       const signIn = {
         name: 'signIn',
         url: '/signIn',
         component: 'signInComponent'
-    }
+      }
 
-    const signUp = {
+      const signUp = {
         name: 'signUp',
         url: '/signUp',
         component: 'signUpComponent'
-    }
+      }
 
-    const mapState = {
-      name: 'mapState',
-      url: '/map',
-      component: 'flightMap'
-    }
+      const mapState = {
+        name: 'mapState',
+        url: '/map',
+        component: 'flightMap'
+      }
 
-    stateProvider.state(signIn)
-    stateProvider.state(signUp)
-    stateProvider.state(mapState)
+      const searchState = {
+        name: 'search',
+        url: '/search',
+        component: 'searchComponent'
+      }
 
-    urlRouter.otherwise('/map')
+      stateProvider.state(signIn)
+      stateProvider.state(signUp)
+      stateProvider.state(mapState)
+      stateProvider.state(searchState)
+
+      urlRouter.otherwise('/map')
     }])
     .constant('apiUrl', apiUrl)
     .component('flightApp', appComponent)

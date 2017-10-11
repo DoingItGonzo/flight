@@ -7,7 +7,7 @@ class MapController {
   markers = []
   paths = []
 
-  constructor (mapService, locations) {
+  constructor(mapService, locations) {
     this.mapService = mapService
 
     // add markers from an angular constant
@@ -31,13 +31,13 @@ class MapController {
       })
   }
 
-  addMarker ({ latitude, longitude }) {
+  addMarker({ latitude, longitude }) {
     this.markers.push({
       position: `[${latitude}, ${longitude}]`
     })
   }
 
-  addPath (a, b, color) {
+  addPath(a, b, color) {
     this.paths.push({
       path: `[[${a.latitude}, ${a.longitude}], [${b.latitude}, ${b.longitude}]]`,
       strokeColor: color,

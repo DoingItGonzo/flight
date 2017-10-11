@@ -42,6 +42,7 @@ public class ItineraryService {
 
 	
 	//This should work, but when I check for the time, I also need to check 
+	// STRING instaed of FLIGHT in CLIENT
 	public List<Itinerary> searchForItinerary(String departure, String destination) {
 		List<Itinerary> possibleRoutes = new ArrayList<Itinerary>();
 		ArrayList<Flight> departureFlights = new ArrayList<Flight>();

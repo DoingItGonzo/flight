@@ -19,7 +19,9 @@ public class Client {
 	private long id;
 	
 	private Credentials credentials;
-	
+	//
+	//
+	//@ElementCollection
 	@OneToMany(mappedBy="clientBooking")
 	private List<Itinerary> itineraries;
 

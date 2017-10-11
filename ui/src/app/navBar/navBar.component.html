@@ -1,0 +1,21 @@
+<!-- NAVIGATION -->
+<nav class="navbar navbar-inverse" role="navigation">
+
+    <ul class="nav navbar-nav">
+        <li class="navbar-header otherOnBar">
+            <div class="navbar-brand"><a ng-click="$ctrl.homePage()"><span class="glyphicon glyphicon-send"></span><font size="5" face="cursive"><em>Flight </em></font></a></div>
+        </li>
+        <li class="otherOnBar">
+            <div class="dropdown">
+                <button class="btn btn-primary navbar-btn dropdown-toggle" type="button" data-toggle="dropdown">
+                        Profile
+                    <span class="caret"></span></button>
+                <ul class="dropdown-menu">
+                    <li><a ng-click="$ctrl.homePage()">My Page</a></li>
+                    <li><a ng-click="$ctrl.settingsPage()">Settings</a></li>
+                    <li><a ng-click="$ctrl.globalService.logout()">Logout</a></li>
+                </ul>
+            </div>
+        </li>
+    </ul>
+</nav>
