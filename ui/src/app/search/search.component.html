@@ -1,52 +1,40 @@
-<!-- <div class="dropdown">
-    <button class="btn btn-primary navbar-btn dropdown-toggle" type="button" data-toggle="dropdown">
-            Departure
-        <span class="caret"></span></button>
-    <button class="btn btn-primary navbar-btn dropdown-toggle" type="button" data-toggle="dropdown">
-            Destination
-        <span class="caret"></span></button>
-    <ul class="dropdown-menu">
-        <li><a ng-click="$ctrl.homePage()">My Page</a></li>
-        <li><a ng-click="$ctrl.settingsPage()">Settings</a></li>
-        <li><a ng-click="$ctrl.globalService.logout()">Logout</a></li>
-    </ul>
-</div> -->
-
 <div class="flexColumn userPage">
-        <div class="flexRow">
-            <div class="flexColumn userPageLeftSide">
-                <p>
-                    <a ui-sref=".followers">
-                        <button ng-class=$ctrl.buttonClasses.followersButtonClass>Followers</button>
-                    </a>
-                </p>
-                <p>
-                    <a ui-sref=".following">
-                        <button ng-class=$ctrl.buttonClasses.followingButtonClass>Following</button>
-                    </a>
-                </p>
-                <p>
-                    <a ui-sref=".mentions">
-                        <button ng-class=$ctrl.buttonClasses.mentionsButtonClass>Mentions</button>
-                    </a>
-                </p>
-                <p>
-                    <a ui-sref=".tweets">
-                        <button ng-class=$ctrl.buttonClasses.tweetsButtonClass>Tweets</button>
-                    </a>
-                </p>
-                <p>
-                    <a ui-sref=".feed">
-                        <button ng-class=$ctrl.buttonClasses.feedButtonClass>Feed</button>
-                    </a>
-                </p>
-            </div>
-            <div class="userPageRightSide panel panel-primary">
-                <div class="flexColumn insideUserPageRightSide">
-                    <div>
-                        <ui-view></ui-view>
+    <div class="flexRow">
+        <div class="flexColumn userPageLeftSide">
+            <p>
+                <div class="dropdown">
+                    <button class="btn btn-primary navbar-btn dropdown-toggle" type="button" data-toggle="dropdown">
+                                        Departure
+                                    <span class="caret"></span></button>
+                    <ul class="dropdown-menu">
+                        <li><a ng-click="$ctrl.homePage()">Memphis</a></li>
+                        <li><a ng-click="$ctrl.settingsPage()">Chattanooga</a></li>
+                        <li><a ng-click="$ctrl.globalService.logout()">Nashville</a></li>
+                    </ul>
+                </div>
+                <div class="dropdown">
+                        <button class="btn btn-primary navbar-btn dropdown-toggle" type="button" data-toggle="dropdown">
+                                            Destination
+                                        <span class="caret"></span></button>
+                        <ul class="dropdown-menu">
+                            <li><a ng-click="$ctrl.homePage()">Memphis</a></li>
+                            <li><a ng-click="$ctrl.settingsPage()">Chattanooga</a></li>
+                            <li><a ng-click="$ctrl.globalService.logout()">ballz</a></li>
+                        </ul>
                     </div>
+            </p>
+            <p>
+                <a>
+                    <button ng-class=$ctrl.buttonClasses.followingButtonClass>Search</button>
+                </a>
+            </p>
+        </div>
+        <div class="userPageRightSide panel panel-primary">
+            <div class="flexColumn insideUserPageRightSide">
+                <div>
+                    <ui-view></ui-view>
                 </div>
             </div>
         </div>
     </div>
+</div>

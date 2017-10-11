@@ -45,6 +45,15 @@ ul.navbar-nav {
     margin: 10px;
 }
 
+.userPageLeftSide {
+    width: 23vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid black;
+}
+
 .userPageRightSide {
     margin-left: 10px;
     width: 100%;
@@ -65,7 +74,7 @@ ul.navbar-nav {
 }
 
 .buttonUserPageLeft {
-    background-color: orange
+    background-color: #D3C00C
 }
 
 .logIn {
@@ -129,3 +138,13 @@ a {
     overflow-wrap: break-word;
     width: 50vw;
 }
+
+.navbar-btn {
+    width: 11vw;
+    background-color: #A3B803;
+    border: 1px solid rgba(79, 71, 71, 0.98);
+}
+
+/* .body {
+    background-color: rgba(79, 71, 71, 0.98);
+} */
