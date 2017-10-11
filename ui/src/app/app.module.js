@@ -47,10 +47,17 @@ export default
         component: 'searchComponent'
       }
 
+      const nestedMapState = {
+        name:'search.map',
+        url: '/flights',
+        component: 'flightMap'
+      }
+
       stateProvider.state(signIn)
       stateProvider.state(signUp)
       stateProvider.state(mapState)
       stateProvider.state(searchState)
+      stateProvider.state(nestedMapState)
 
       urlRouter.otherwise('/map')
     }])

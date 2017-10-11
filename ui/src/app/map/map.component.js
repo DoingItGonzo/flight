@@ -10,13 +10,17 @@ class MapController {
   constructor(mapService) {
     this.mapService = mapService
 
-    const paths = []
     this.mapService.getLocations().then((done) => {
       this.mapService.getFlights().then((donezo) => {
+
         donezo.data.forEach(flight => {
           done.data.forEach(place => {
-            if (String(flight.destination).toLowerCase() == String(place.city).toLowerCase()) flight.destination = place
-            if (String(flight.origin).toLowerCase() == String(place.city).toLowerCase()) flight.origin = place
+
+            if (String(flight.destination).toLowerCase() == String(place.city).toLowerCase())
+              flight.destination = place
+            if (String(flight.origin).toLowerCase() == String(place.city).toLowerCase()) 
+              flight.origin = place
+
             this.addMarker(place)
           })
           this.addPath(flight.origin, flight.destination, '#CC0099')
