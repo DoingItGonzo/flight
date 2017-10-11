@@ -2,13 +2,15 @@ package com.cooksys.entity;
 
 import java.util.ArrayList;
 
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
-import com.cooksys.pojo.Flight; 
+import com.cooksys.pojo.Flight;
+import com.cooksys.pojo.ItineraryFlights; 
 
 @Entity
 public class Itinerary {
@@ -24,6 +26,10 @@ public class Itinerary {
 	@ManyToOne
 	private Client clientBooking;
 	
+//	@Embedded
+//	private ArrayList<ItineraryFlights> flights = new ArrayList<ItineraryFlights>();
+	
+	@Embedded
 	private ArrayList<Flight> flights = new ArrayList<Flight>();
 
 	public long getTotalFlightTime() {
@@ -34,8 +40,19 @@ public class Itinerary {
 		return layoverTime;
 	}
 
+//	public ArrayList<ItineraryFlights> getFlights() {
+//		return flights;
+//	}
+//
+//	public void setFlights(ArrayList<ItineraryFlights> flights) {
+//		this.flights = flights;
+//	}
 	public ArrayList<Flight> getFlights() {
 		return flights;
+	}
+
+	public void setFlights(ArrayList<Flight> flights) {
+		this.flights = flights;
 	}
 
 	public void setTotalFlightTime(long totalFlightTime) {
@@ -46,9 +63,6 @@ public class Itinerary {
 		this.layoverTime = layoverTime;
 	}
 
-	public void setFlights(ArrayList<Flight> flights) {
-		this.flights = flights;
-	}
 
 	@Override
 	public int hashCode() {

@@ -1,7 +1,6 @@
 package com.cooksys.service;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -10,6 +9,7 @@ import com.cooksys.entity.Client;
 import com.cooksys.entity.Itinerary;
 import com.cooksys.pojo.Cities;
 import com.cooksys.pojo.Flight;
+import com.cooksys.pojo.ItineraryFlights;
 import com.cooksys.repository.ItineraryRepository;
 
 @Service
@@ -85,7 +85,8 @@ public class ItineraryService {
 
 	public Itinerary itineraryFactory(Flight... flights) {
 		Itinerary itinerary = new Itinerary();
-		long itineraryFlightTime = 0;
+		ItineraryFlights allFlights = new ItineraryFlights();
+		long flightTime = 0;
 		long layover = 0;
 		long previousFlightArrivalTime = 0;
 		for (Flight flight : flights) {
@@ -94,13 +95,16 @@ public class ItineraryService {
 			else {
 				if (previousFlightArrivalTime > 0)
 					layover += flight.getOffset() - previousFlightArrivalTime;
-				itineraryFlightTime += flight.getFlightTime();
+				flightTime += flight.getFlightTime();
 				itinerary.getFlights().add(flight);
+//				allFlights.setOrigin(flight.getOrigin());
+//				allFlights.setDestination(flight.getDestination());
+//				itinerary.getFlights().add(allFlights);
 				previousFlightArrivalTime = flight.getOffset() + flight.getFlightTime();
 			}
 		}
 		itinerary.setLayoverTime(layover);
-		itinerary.setTotalFlightTime(itineraryFlightTime);
+		itinerary.setTotalFlightTime(flightTime);
 		return itinerary;
 	}
 

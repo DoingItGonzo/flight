@@ -10,11 +10,20 @@ class MapController {
   constructor(mapService) {
     this.mapService = mapService
 
+    this.testFlight = {}
+    this.testFlight.offset
+    this.testFlight.flightTime
+    this.testFlight.origin = {}
+    this.testFlight.destination = {}
+    this.testFlight.origin.city
+    this.testFlight.destination.city
+
     this.mapService.getLocations().then((done) => {
       this.mapService.getFlights().then((donezo) => {
 
         donezo.data.forEach(flight => {
           console.log(flight)
+          this.testFlight = flight
           done.data.forEach(place => {
 
             if (String(flight.destination).toLowerCase() == String(place.city).toLowerCase())

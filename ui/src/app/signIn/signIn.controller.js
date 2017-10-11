@@ -3,8 +3,9 @@ import SignInService from './signIn.service.js'
 /* @ngInject */
 class SignInController {
     
-        constructor(signInService, $state) {
+        constructor(signInService, globalService, $state) {
             this.signInService = signInService
+            this.globalService = globalService
             this.state = $state
             this.client = {}
             this.client.credentials = {}
@@ -22,9 +23,11 @@ class SignInController {
                 console.log(done.data)
                 if (done.data) {
                     this.signInService.getAccount(this.client.credentials.username).then((done) => {
+                        this.globalService.newSignIn(done.data.credentials)
+                        this.globalService.loggedIn = true
                         console.log(done.data.credentials.username)
                         this.client.credentials = done.data.credentials
-                        this.state.go('mapState')
+                        this.state.go('search.map')
                     })
                 }
                 console.log(done.data)
@@ -35,7 +38,7 @@ class SignInController {
             console.log(this.client.credentials.username)
             this.signInService.createAccount(this.client).then((done) => {
                 console.log(done.data)
-                this.state.go('mapState')
+                this.state.go('search.map')
             })
         }
     
