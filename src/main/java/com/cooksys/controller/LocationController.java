@@ -23,7 +23,7 @@ public class LocationController {
 		this.locationService = locationService;
 	}
 	
-	@RequestMapping
+	@RequestMapping("/all")
 	public List<Location> get() {
 		return locationService.getAll();
 	}
