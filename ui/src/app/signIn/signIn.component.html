@@ -1,4 +1,4 @@
-<div class="container">
+<!-- <div class="container">
     <div class="panel panel-default">
         <p>Username: <input type="text" size="20" ng-model="signInController.client.credentials.username"></input>
         </p>
@@ -11,4 +11,38 @@
             <!-- <p ng-if=$ctrl.failedSignIn>User not found</p> -->
         </div>
     </div>
-</div>
+</div> -->
+<div class="flexColumn userPage">
+        <div class="flexRow">
+            <div class="flexColumn userPageLeftSide">
+                <p>
+                    <div class="dropdown">
+                            <div class="panel panel-default">
+                                    <p>Username: <input type="text" size="20" ng-model="signInController.client.credentials.username"></input>
+                                    </p>
+                                    <p>Password: <input type="text" size="20" ng-model="signInController.client.credentials.password"></input>
+                                    </p>
+                                    <div class="logInButtons">
+                                        <button class="btn signButton" ng-click="signInController.login()">Let's Tweet!</button>
+                                        <button class="btn signButton" ng-click="signInController.signUp()">Sign Up</button>
+                            
+                                        <!-- <p ng-if=$ctrl.failedSignIn>User not found</p> -->
+                                    </div>
+                                </div>
+                        </div>
+                </p>
+                <p>
+                    <a>
+                        <button ng-class=$ctrl.buttonClasses.followingButtonClass>Search</button>
+                    </a>
+                </p>
+            </div>
+            <div class="userPageRightSide panel panel-primary">
+                <div class="flexColumn insideUserPageRightSide">
+                    <div>
+                        <ui-view></ui-view>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

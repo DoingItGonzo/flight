@@ -14,6 +14,7 @@ class MapController {
       this.mapService.getFlights().then((donezo) => {
 
         donezo.data.forEach(flight => {
+          console.log(flight)
           done.data.forEach(place => {
 
             if (String(flight.destination).toLowerCase() == String(place.city).toLowerCase())

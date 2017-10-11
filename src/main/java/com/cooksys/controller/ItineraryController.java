@@ -38,7 +38,7 @@ public class ItineraryController {
 	public Itinerary getOneItinerary(@PathVariable long id){
 		return itineraryService.getOneItinerary(id);
 	}
-	@GetMapping("search/{departure}")
+	@PostMapping("search/{departure}")
 	public List<Itinerary> searchForItinerary(@PathVariable String departure, @RequestBody String destination) {
 		return itineraryService.searchForItinerary(departure, destination);
 	}

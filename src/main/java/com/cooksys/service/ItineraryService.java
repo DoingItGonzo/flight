@@ -49,13 +49,12 @@ public class ItineraryService {
 		ArrayList<Flight> destinationFlights = new ArrayList<Flight>();
 
 		for (Flight flight : flightService.getDailyFlightList()) {
-			if (flight.getOrigin().equals(departure) && flight.getDestination().equals(destination))
-//				possibleRoutes.add(singleFlightItinerary(flight));
+			if (flight.getOrigin().equalsIgnoreCase(departure) && flight.getDestination().equalsIgnoreCase(destination))
 				possibleRoutes.add(itineraryFactory(flight));
 			else {
-				if (flight.getOrigin().equals(departure))
+				if (flight.getOrigin().equalsIgnoreCase(departure))
 					departureFlights.add(flight);
-				if (flight.getDestination().equals(destination))
+				if (flight.getDestination().equalsIgnoreCase(destination))
 					destinationFlights.add(flight);
 			}
 		}
@@ -70,16 +69,12 @@ public class ItineraryService {
 		ArrayList<Itinerary> allPossibleRoutes = new ArrayList<>();
 		for (Flight origin : departureMatch) {
 			for (Flight destination : destinationMatch) {
-				if (origin.getDestination().equals(destination.getOrigin())) {
+				if (origin.getDestination().equalsIgnoreCase(destination.getOrigin())) {
 					allPossibleRoutes.add(itineraryFactory(origin, destination));
 				}
 				for (Flight flights : flightService.getDailyFlightList()) {
-					if (flights.getOrigin().equals(origin.getDestination())
-							&& flights.getDestination().equals(destination.getOrigin())) {
-						
-//						itinerary.add(origin); itinerary.add(destination); itinerary.add(flights);
-//						allPossibleRoutes.add(itineraryFactory(itinerary));
-//						itinerary.clear();
+					if (flights.getOrigin().equalsIgnoreCase(origin.getDestination())
+							&& flights.getDestination().equalsIgnoreCase(destination.getOrigin())) {
 						allPossibleRoutes.add(itineraryFactory(origin, flights, destination));
 					}
 				}
@@ -87,43 +82,12 @@ public class ItineraryService {
 		}
 		return allPossibleRoutes;
 	}
-	
-//	ArrayList<Itinerary> allPossibleRoutes = new ArrayList<>();
-//	ArrayList<Flight> itinerary = new ArrayList<>();
-//	for (Flight origin : departureMatch) {
-//		for (Flight destination : destinationMatch) {
-//			if (origin.getDestination().equals(destination.getOrigin())) {
-//				
-//				itinerary.add(origin); itinerary.add(destination);
-//				allPossibleRoutes.add(itineraryFactory(itinerary));
-//				itinerary.clear();
-//			}
-//			for (Flight flights : flightService.getDailyFlightList()) {
-//				if (flights.getOrigin().equals(origin.getDestination())
-//						&& flights.getDestination().equals(destination.getOrigin())) {
-//					
-//					itinerary.add(origin); itinerary.add(destination); itinerary.add(flights);
-//					allPossibleRoutes.add(itineraryFactory(itinerary));
-//					itinerary.clear();
-//				}
-//			}
-
-//	public Itinerary singleFlightItinerary(Flight flight) {
-//		Itinerary itinerary = new Itinerary();
-//		itinerary.setTotalFlightTime(flight.getFlightTime());
-//		itinerary.setLayoverTime(0);
-//		itinerary.getFlights().add(flight);
-//		return itinerary;
-//	}
-
 
 	public Itinerary itineraryFactory(Flight... flights) {
-//	public Itinerary itineraryFactory(ArrayList<Flight> itineraryFlights) {
 		Itinerary itinerary = new Itinerary();
 		long itineraryFlightTime = 0;
 		long layover = 0;
 		long previousFlightArrivalTime = 0;
-//		itineraryFlights.sort(Comparator.comparing(Flight::getOffset));
 		for (Flight flight : flights) {
 			if (flight.getOffset() + flight.getFlightTime() < previousFlightArrivalTime)
 				return null;

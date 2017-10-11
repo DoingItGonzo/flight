@@ -28,6 +28,11 @@ export default
         url: '/signIn',
         component: 'signInComponent'
       }
+      const signInMapState = {
+        name:'signIn.map',
+        url: '/flights',
+        component: 'flightMap'
+      }
 
       const signUp = {
         name: 'signUp',
@@ -58,6 +63,8 @@ export default
       stateProvider.state(mapState)
       stateProvider.state(searchState)
       stateProvider.state(nestedMapState)
+      stateProvider.state(signInMapState)
+
 
       urlRouter.otherwise('/map')
     }])

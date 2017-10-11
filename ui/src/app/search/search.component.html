@@ -4,28 +4,30 @@
             <p>
                 <div class="dropdown">
                     <button class="btn btn-primary navbar-btn dropdown-toggle" type="button" data-toggle="dropdown">
-                                        Departure
+                            {{searchController.departure}}
                                     <span class="caret"></span></button>
                     <ul class="dropdown-menu">
-                        <li><a ng-click="$ctrl.homePage()">Memphis</a></li>
-                        <li><a ng-click="$ctrl.settingsPage()">Chattanooga</a></li>
-                        <li><a ng-click="$ctrl.globalService.logout()">Nashville</a></li>
+                        <li><a ng-click="searchController.memphisDeparture()">Memphis</a></li>
+                        <li><a ng-click="searchController.chattanoogaDeparture()">Chattanooga</a></li>
+                        <li><a ng-click="searchController.nashvilleDeparture()">Nashville</a></li>
+                        <li><a ng-click="searchController.knoxvilleDeparture()">Knoxville</a></li>
                     </ul>
                 </div>
                 <div class="dropdown">
-                        <button class="btn btn-primary navbar-btn dropdown-toggle" type="button" data-toggle="dropdown">
-                                            Destination
+                    <button class="btn btn-primary navbar-btn dropdown-toggle" type="button" data-toggle="dropdown">
+                                            {{searchController.destination}}
                                         <span class="caret"></span></button>
-                        <ul class="dropdown-menu">
-                            <li><a ng-click="$ctrl.homePage()">Memphis</a></li>
-                            <li><a ng-click="$ctrl.settingsPage()">Chattanooga</a></li>
-                            <li><a ng-click="$ctrl.globalService.logout()">ballz</a></li>
-                        </ul>
-                    </div>
+                    <ul class="dropdown-menu">
+                        <li><a ng-click="searchController.memphisDestination()">Memphis</a></li>
+                        <li><a ng-click="searchController.chattanoogaDestination()">Chattanooga</a></li>
+                        <li><a ng-click="searchController.nashvilleDestination()">Nashville</a></li>
+                        <li><a ng-click="searchController.knoxvilleDestination()">Knoxville</a></li>
+                    </ul>
+                </div>
             </p>
             <p>
                 <a>
-                    <button ng-class=$ctrl.buttonClasses.followingButtonClass>Search</button>
+                    <button ng-click=searchController.searchForItinerary()>Search</button>
                 </a>
             </p>
         </div>
