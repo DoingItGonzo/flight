@@ -31,16 +31,22 @@ class SearchController {
     knoxvilleDestination = () => this.destination = "Knoxville"
     nashvilleDestination = () => this.destination = "Nashville"
 
+    // searchForItinerary = () => {
+    //     this.searchService.searchForItinerary(this.departure, this.destination).then((done) => {
+    //         this.globalService.newItinerary(done.data[0])
+    //         console.log(done.data)
+    //         this.itineraries = done.data
+    //     })
+    // }
+
     searchForItinerary = () => {
-        this.searchService.searchForItinerary(this.departure, this.destination).then((done) => {
-            this.globalService.newItinerary(done.data[0])
-            console.log(done.data)
-            this.itineraries = done.data
+        this.state.go('searchResult', {
+            departure: this.departure,
+            destination: this.destination
         })
     }
+}
 
     // clientHistory = ()
-
-}
 
 export default SearchController

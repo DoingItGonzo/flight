@@ -17,6 +17,8 @@ class GlobalService {
         this.itineraryParam.flightTime
         this.itineraryParam.offset
 
+        
+
     }
 
 

@@ -8,6 +8,7 @@ import searchComponent from './search/search.module'
 import itineraryComponent from './itinerary/itinerary.module'
 import flightComponent from './flight/flight.module'
 import itineraryMap from './map/itineraryMap.module'
+import resultComponent from './result/result.module'
 
 export default
   angular
@@ -25,7 +26,8 @@ export default
       searchComponent,
       itineraryComponent,
       flightComponent,
-      itineraryMap
+      itineraryMap,
+      resultComponent
 
     ]).config(['$stateProvider', '$urlRouterProvider', function (stateProvider, urlRouter) {
 
@@ -81,6 +83,39 @@ export default
         component: 'flightComponent'
       }
 
+      const resultState = {
+        name: 'result',
+        url: '/result',
+        component: 'resultComponent',
+        resolve: {
+          itineraries: ['globalService', 'searchService', '$stateParams', function (globalService, searchService, stateParams) {
+            return searchService.getAllPastItineraries(globalService.credentials.username).then((done) => {
+                resultController.itineraryList = done.data
+                return done.data
+            })
+        }]
+        }
+      }
+
+      const searchResultState = {
+        name: 'searchResult',
+        url: '/searchresult',
+        component: 'resultComponent',
+        params: {
+          departure: null,
+          destination: null
+        },
+        resolve: {
+          itineraries: ['globalService', 'searchService', '$stateParams', function (globalService, searchService, stateParams) {
+            console.log(stateParams.departure)
+            console.log(stateParams.destination)
+            return searchService.searchForItinerary(stateParams.departure, stateParams.destination).then((done) => {
+                return done.data
+            })
+        }]
+        }
+      }
+
       stateProvider.state(signIn)
       stateProvider.state(signUp)
       stateProvider.state(mapState)
@@ -90,9 +125,10 @@ export default
       stateProvider.state(itineraryState)
       stateProvider.state(flightState)
       stateProvider.state(itineraryMapState)
+      stateProvider.state(searchResultState)
 
 
-      urlRouter.otherwise('/search/flights')
+      urlRouter.otherwise('/itinerary')
     }])
     .constant('apiUrl', apiUrl)
     .component('flightApp', appComponent)

@@ -1,8 +1,11 @@
 import templateUrl from './itinerary.component.html'
-import SearchController from './../search/search.controller.js'
+import ItineraryController from './itinerary.controller.js'
 
 export default {
     templateUrl,
-    controller: SearchController,
-    controllerAs: 'searchController'
+    controller: ItineraryController,
+    controllerAs: 'itineraryController',
+    bindings: {
+        boundItineraries: '='
+    }
 }
