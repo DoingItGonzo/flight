@@ -11,6 +11,14 @@ class GlobalService {
         this.credentials.username
         this.credentials.password
 
+        this.itineraryParam = {}
+        this.itineraryParam.offset
+        this.itineraryParam.flightTime
+        this.itineraryParam.origin = {}
+        this.itineraryParam.destination = {}
+        this.itineraryParam.origin.city
+        this.itineraryParam.destination.city
+
     }
 
 

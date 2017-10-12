@@ -13,10 +13,10 @@ class ItineraryController {
 
     }
 
-    // viewItinerary = () => {
-    //     this.globalService.newItinerary(this.itinerary)
-    //     // this.state.go('result.map')
-    // }
+    viewItinerary = () => {
+        this.globalService.newItinerary(this.boundItineraries)
+        this.state.go('search.itineraryMap')
+    }
 
     book = () => {
         this.searchService.bookItinerary(this.globalService.credentials.username, this.boundItineraries).then((done) => {
