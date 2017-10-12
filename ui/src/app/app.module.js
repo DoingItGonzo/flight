@@ -10,6 +10,8 @@ import flightComponent from './flight/flight.module'
 import itineraryMap from './map/itineraryMap.module'
 import resultComponent from './result/result.module'
 import historyComponent from './history/history.module'
+import allFlightComponent from './allFlight/allFlight.module'
+
 
 export default
   angular
@@ -29,7 +31,8 @@ export default
       flightComponent,
       itineraryMap,
       resultComponent,
-      historyComponent
+      historyComponent,
+      allFlightComponent
 
     ]).config(['$stateProvider', '$urlRouterProvider', function (stateProvider, urlRouter) {
 
@@ -83,6 +86,20 @@ export default
         name: 'flightListState',
         url: '/flightList',
         component: 'flightComponent'
+      }
+
+      const allFlightState = {
+        name: 'allFlights',
+        url: '/allFlights',
+        component: 'allFlightComponent',
+        resolve: {
+          flights: ['mapService', function (mapService) {
+            return mapService.getFlights().then((done) => {
+              console.log(done.data)
+              return done.data
+            })
+          }]
+        }
       }
 
       const resultState = {
@@ -143,6 +160,7 @@ export default
       stateProvider.state(itineraryMapState)
       stateProvider.state(searchResultState)
       stateProvider.state(historyState)
+      stateProvider.state(allFlightState)
 
 
       urlRouter.otherwise('/signIn/flights')

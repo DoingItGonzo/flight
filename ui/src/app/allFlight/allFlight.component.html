@@ -1,0 +1,5 @@
+<h1>Currently Available Flights:</h1>
+<button ng-click="allFlightController.searchPage()">Search For Your Route</button>
+<div ng-repeat="listedFlight in allFlightController.flights">
+        <flight-component flights="listedFlight"></flight-component>
+    </div>    
