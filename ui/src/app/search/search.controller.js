@@ -40,13 +40,12 @@ class SearchController {
     // }
 
     searchForItinerary = () => {
+
         this.state.go('searchResult', {
             departure: this.departure,
             destination: this.destination
         })
     }
 }
-
-    // clientHistory = ()
 
 export default SearchController

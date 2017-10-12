@@ -2,7 +2,6 @@
 class ResultController {
 
     constructor() {
-        this.itineraryList = []
     }
 
 }

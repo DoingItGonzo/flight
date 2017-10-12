@@ -1,23 +1,15 @@
 /* @ngInject */
 class GlobalService {
 
-    constructor($http) {
+    constructor($http, $state) {
+
+        this.state = $state
 
         this.loggedIn = false
 
         this.credentials = {}
         this.credentials.username
         this.credentials.password
-
-        this.itineraryParam = {}
-        this.itineraryParam.origin = {}
-        this.itineraryParam.origin.city
-        this.itineraryParam.destination = {}
-        this.itineraryParam.destination.city
-        this.itineraryParam.flightTime
-        this.itineraryParam.offset
-
-        
 
     }
 
@@ -29,10 +21,16 @@ class GlobalService {
         return this.itineraryParam
     }
     newSignIn = (credentials) => {
+        this.loggedIn = true
         this.credentials = credentials
     }
     storedCredentials = () => {
         return this.credentails
+    }
+    logout = () => {
+        this.loggedIn = false
+        this.credentials = {}
+        this.state.go('signIn.map')
     }
 
 

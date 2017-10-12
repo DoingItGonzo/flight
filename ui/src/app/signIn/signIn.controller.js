@@ -24,7 +24,7 @@ class SignInController {
                 if (done.data) {
                     this.signInService.getAccount(this.client.credentials.username).then((done) => {
                         this.globalService.newSignIn(done.data.credentials)
-                        this.globalService.loggedIn = true
+
                         console.log(done.data.credentials.username)
                         this.client.credentials = done.data.credentials
                         this.state.go('search.map')
@@ -37,9 +37,23 @@ class SignInController {
         create = () => {
             console.log(this.client.credentials.username)
             this.signInService.createAccount(this.client).then((done) => {
+                this.globalService.newSignIn(done.data.credentials)
                 console.log(done.data)
                 this.state.go('search.map')
             })
+        }
+
+        logout = () => {
+            this.globalService.logout()
+            this.client = {}
+        }
+
+        // historyPage = () => {
+        //     this.state.go('history')
+        // }
+
+        searchPage = () => {
+            this.state.go('search.map')
         }
     
     }

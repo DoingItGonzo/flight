@@ -9,6 +9,7 @@ import itineraryComponent from './itinerary/itinerary.module'
 import flightComponent from './flight/flight.module'
 import itineraryMap from './map/itineraryMap.module'
 import resultComponent from './result/result.module'
+import historyComponent from './history/history.module'
 
 export default
   angular
@@ -27,7 +28,8 @@ export default
       itineraryComponent,
       flightComponent,
       itineraryMap,
-      resultComponent
+      resultComponent,
+      historyComponent
 
     ]).config(['$stateProvider', '$urlRouterProvider', function (stateProvider, urlRouter) {
 
@@ -37,7 +39,7 @@ export default
         component: 'signInComponent'
       }
       const signInMapState = {
-        name:'signIn.map',
+        name: 'signIn.map',
         url: '/flights',
         component: 'flightMap'
       }
@@ -61,13 +63,13 @@ export default
       }
 
       const nestedMapState = {
-        name:'search.map',
+        name: 'search.map',
         url: '/flights',
         component: 'flightMap'
       }
 
       const itineraryMapState = {
-        name:'search.itineraryMap',
+        name: 'search.itineraryMap',
         url: '/itineraryMap',
         component: 'itineraryMap'
       }
@@ -90,10 +92,23 @@ export default
         resolve: {
           itineraries: ['globalService', 'searchService', '$stateParams', function (globalService, searchService, stateParams) {
             return searchService.getAllPastItineraries(globalService.credentials.username).then((done) => {
-                resultController.itineraryList = done.data
-                return done.data
+              resultController.itineraryList = done.data
+              return done.data
             })
-        }]
+          }]
+        }
+      }
+
+      const historyState = {
+        name: 'history',
+        url: '/history',
+        component: 'historyComponent',
+        resolve: {
+          itineraries: ['globalService', 'searchService', '$stateParams', function (globalService, searchService, stateParams) {
+            return searchService.getAllPastItineraries(globalService.credentials.username).then((done) => {
+              return done.data
+            })
+          }]
         }
       }
 
@@ -110,10 +125,10 @@ export default
             console.log(stateParams.departure)
             console.log(stateParams.destination)
             return searchService.searchForItinerary(stateParams.departure, stateParams.destination).then((done) => {
-                console.log(done.data)
-                return done.data
+              console.log(done.data)
+              return done.data
             })
-        }]
+          }]
         }
       }
 
@@ -127,9 +142,10 @@ export default
       stateProvider.state(flightListState)
       stateProvider.state(itineraryMapState)
       stateProvider.state(searchResultState)
+      stateProvider.state(historyState)
 
 
-      urlRouter.otherwise('/itinerary')
+      urlRouter.otherwise('/signIn/flights')
     }])
     .constant('apiUrl', apiUrl)
     .component('flightApp', appComponent)

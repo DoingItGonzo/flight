@@ -10,14 +10,6 @@ class MapController {
   constructor(mapService) {
     this.mapService = mapService
 
-    this.testFlight = {}
-    this.testFlight.offset
-    this.testFlight.flightTime
-    this.testFlight.origin = {}
-    this.testFlight.destination = {}
-    this.testFlight.origin.city
-    this.testFlight.destination.city
-
     this.mapService.getLocations().then((done) => {
       this.mapService.getFlights().then((donezo) => {
 
