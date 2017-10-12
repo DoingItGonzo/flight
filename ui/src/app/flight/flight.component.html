@@ -2,7 +2,7 @@
         <div class="panel panel-default">
 <p>Leaving From: {{flightDisplayController.flights.origin}}</p>
 <p>Arriving At: {{flightDisplayController.flights.destination}}</p>
-<p>Departure Time: {{flightDisplayController.flights.offset}}</p>
+<p>Departure Time: {{flightDisplayController.flights.offset | date:"'at' h:mma"}}</p>
 <p>Flight Duration: {{flightDisplayController.flights.flightTime}}</p>
         </div>
 </div>

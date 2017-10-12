@@ -7,9 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.cooksys.entity.Client;
 import com.cooksys.entity.Itinerary;
-import com.cooksys.pojo.Cities;
 import com.cooksys.pojo.Flight;
-import com.cooksys.pojo.ItineraryFlights;
 import com.cooksys.repository.ItineraryRepository;
 
 @Service
@@ -42,18 +40,19 @@ public class ItineraryService {
 		return itineraryRepository.findById(id);
 	}
 
+
 	
-	//This should work, but when I check for the time, I also need to check 
-	// STRING instaed of FLIGHT in CLIENT
+
 	public List<Itinerary> searchForItinerary(String departure, String destination) {
 		List<Itinerary> possibleRoutes = new ArrayList<Itinerary>();
 		ArrayList<Flight> departureFlights = new ArrayList<Flight>();
 		ArrayList<Flight> destinationFlights = new ArrayList<Flight>();
 
 		for (Flight flight : flightService.getDailyFlightList()) {
+
 			if (flight.getOrigin().equalsIgnoreCase(departure) && flight.getDestination().equalsIgnoreCase(destination))
-				if (itineraryFactory(flight) != null) possibleRoutes.add(itineraryFactory(flight));
-//				possibleRoutes.add(itineraryFactory(flight));
+				possibleRoutes.add(itineraryFactory(flight));
+
 			else {
 				if (flight.getOrigin().equalsIgnoreCase(departure))
 					departureFlights.add(flight);
@@ -61,24 +60,29 @@ public class ItineraryService {
 					destinationFlights.add(flight);
 			}
 		}
-		for (Itinerary itinerary: departureConnection(departureFlights, destinationFlights)) {
+		for (Itinerary itinerary : departureConnection(departureFlights, destinationFlights)) {
+
 			if (!(itinerary == null))
 				possibleRoutes.add(itinerary);
 		}
 		return possibleRoutes;
 	}
 
+	
 	public List<Itinerary> departureConnection(List<Flight> departureMatch, List<Flight> destinationMatch) {
 		ArrayList<Itinerary> allPossibleRoutes = new ArrayList<>();
 		for (Flight origin : departureMatch) {
+
 			for (Flight destination : destinationMatch) {
-				if (origin.getDestination().equalsIgnoreCase(destination.getOrigin())) {
+
+				if (origin.getDestination().equalsIgnoreCase(destination.getOrigin()))
 					allPossibleRoutes.add(itineraryFactory(origin, destination));
-				}
+
 				for (Flight flights : flightService.getDailyFlightList()) {
+
 					if (flights.getOrigin().equalsIgnoreCase(origin.getDestination())
-							&& flights.getDestination().equalsIgnoreCase(destination.getOrigin())) {
-						allPossibleRoutes.add(itineraryFactory(origin, flights, destination));
+						&& flights.getDestination().equalsIgnoreCase(destination.getOrigin())) {
+							allPossibleRoutes.add(itineraryFactory(origin, flights, destination));
 					}
 				}
 			}
@@ -86,24 +90,25 @@ public class ItineraryService {
 		return allPossibleRoutes;
 	}
 
+	
 	public Itinerary itineraryFactory(Flight... flights) {
 		Itinerary itinerary = new Itinerary();
 		List<Flight> listForItinerary = new ArrayList<Flight>();
 		long flightTime = 0;
 		long layover = 0;
 		long previousFlightArrivalTime = 0;
+		
 		for (Flight flight : flights) {
-			System.out.println(flight);
+
 			if (flight.getOffset() + flight.getFlightTime() < previousFlightArrivalTime)
 				return null;
+			
 			else {
 				if (previousFlightArrivalTime > 0)
 					layover += flight.getOffset() - previousFlightArrivalTime;
+				
 				flightTime += flight.getFlightTime();
 				listForItinerary.add(flight);
-//				allFlights.setOrigin(flight.getOrigin());
-//				allFlights.setDestination(flight.getDestination());
-//				itinerary.getFlights().add(allFlights);
 				previousFlightArrivalTime = flight.getOffset() + flight.getFlightTime();
 			}
 		}
