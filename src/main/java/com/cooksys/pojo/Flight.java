@@ -1,5 +1,9 @@
 package com.cooksys.pojo;
 
+import javax.persistence.Embeddable;
+import javax.persistence.Entity;
+
+@Embeddable
 public class Flight {
 	
 	//Name of city where flight originates
@@ -12,7 +16,11 @@ public class Flight {
 	private long flightTime;
 	
 	//How many hours after the start of the day until the flight takes off
-	private long offset;
+	private long theOffset;
+	
+	public Flight(){
+		
+	}
 	
 	public String getOrigin() {
 		return origin;
@@ -33,17 +41,17 @@ public class Flight {
 		this.flightTime = flightTime;
 	}
 	public long getOffset() {
-		return offset;
+		return theOffset;
 	}
 	public void setOffset(long offset) {
-		this.offset = offset;
+		this.theOffset = offset;
 	}
-	public Flight(String origin, String destination, long flightTime, long offset) {
+	public Flight(String origin, String destination, long flightTime, long theOffset) {
 		super();
 		this.origin = origin;
 		this.destination = destination;
 		this.flightTime = flightTime;
-		this.offset = offset;
+		this.theOffset = theOffset;
 	}
 	
 	

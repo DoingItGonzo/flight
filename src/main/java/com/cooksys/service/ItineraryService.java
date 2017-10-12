@@ -17,7 +17,6 @@ public class ItineraryService {
 
 	private ClientService clientService;
 	private ItineraryRepository itineraryRepository;
-	private Cities cities;
 	private FlightService flightService;
 
 	ItineraryService(ClientService clientService, ItineraryRepository itineraryRepository,
@@ -32,7 +31,10 @@ public class ItineraryService {
 		return client.getItineraries();
 	}
 
-	public Itinerary bookItinerary(Itinerary itinerary) {
+	public Itinerary bookItinerary(String username, Itinerary itinerary) {
+		List<Itinerary> itineraryList = clientService.getClient(username).getItineraries();
+		itineraryList.add(itinerary);
+		clientService.getClient(username).setItineraries(itineraryList);
 		return itineraryRepository.save(itinerary);
 	}
 
@@ -50,7 +52,8 @@ public class ItineraryService {
 
 		for (Flight flight : flightService.getDailyFlightList()) {
 			if (flight.getOrigin().equalsIgnoreCase(departure) && flight.getDestination().equalsIgnoreCase(destination))
-				possibleRoutes.add(itineraryFactory(flight));
+				if (itineraryFactory(flight) != null) possibleRoutes.add(itineraryFactory(flight));
+//				possibleRoutes.add(itineraryFactory(flight));
 			else {
 				if (flight.getOrigin().equalsIgnoreCase(departure))
 					departureFlights.add(flight);
@@ -85,24 +88,26 @@ public class ItineraryService {
 
 	public Itinerary itineraryFactory(Flight... flights) {
 		Itinerary itinerary = new Itinerary();
-		ItineraryFlights allFlights = new ItineraryFlights();
+		List<Flight> listForItinerary = new ArrayList<Flight>();
 		long flightTime = 0;
 		long layover = 0;
 		long previousFlightArrivalTime = 0;
 		for (Flight flight : flights) {
+			System.out.println(flight);
 			if (flight.getOffset() + flight.getFlightTime() < previousFlightArrivalTime)
 				return null;
 			else {
 				if (previousFlightArrivalTime > 0)
 					layover += flight.getOffset() - previousFlightArrivalTime;
 				flightTime += flight.getFlightTime();
-				itinerary.getFlights().add(flight);
+				listForItinerary.add(flight);
 //				allFlights.setOrigin(flight.getOrigin());
 //				allFlights.setDestination(flight.getDestination());
 //				itinerary.getFlights().add(allFlights);
 				previousFlightArrivalTime = flight.getOffset() + flight.getFlightTime();
 			}
 		}
+		itinerary.setFlights(listForItinerary);
 		itinerary.setLayoverTime(layover);
 		itinerary.setTotalFlightTime(flightTime);
 		return itinerary;

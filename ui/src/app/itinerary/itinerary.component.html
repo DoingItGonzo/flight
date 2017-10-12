@@ -1,18 +1,24 @@
 <!-- <div class="panel panel-info">
         <div class="panel-body"> -->
-<div>
+<div class="container flight-box">
+        <div class="panel panel-default">
     <!-- <a ng-click="$ctrl.goToUser($ctrl.tweet.author.username)">@{{ $ctrl.tweet.author.username }}</a> -->
     <p>
         <p>Total Flight Time: {{itineraryController.boundItineraries.totalFlightTime}}</p>
         <p>Hours of Layover: {{itineraryController.boundItineraries.layoverTime}}</p>
+        <div class="flight-title">
+        <h5>Flights:</h5>
+        </div>
+        <div ng-repeat="listedFlight in itineraryController.boundItineraries.flights">
+            <flight-component flights="listedFlight"></flight-component>
+        </div>    
         <button ng-if=$ctrl.globalService.loggedIn class="btn btn-default" ng-click="$ctrl.likeTweet(tweet.id)">
                             Like <span class="glyphicon glyphicon-thumbs-up"></span>
             </button>
         <button class="btn btn-default" ng-click="itineraryController.book()">Book</button>
         <button class="btn btn-default" ng-click="itineraryController.viewItinerary()">View on Map</button>
-        <button class="btn btn-default" ng-click="searchController.searchForItinerary()">Get Itinerary</button>
-        <button ng-if="$ctrl.canDelete" class="btn btn-danger" ng-confirm-click="Are you sure you want to delete this tweet?" confirmed-click="$ctrl.deleteTweet()">Delete</button>
+        <button class="btn btn-default" ng-click="itineraryController.returnToSearch()">Return to Search</button>
     </p>
 </div>
-<!-- </div>
-</div> -->
+<!-- <!-- </div> -->
+</div> 

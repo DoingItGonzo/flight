@@ -9,8 +9,8 @@ class SearchService {
         return this.$http.get('http://localhost:8000/itinerary/history/' + username)
     }
 
-    bookItinerary = (itinerary) => {
-        return this.$http.post('http://localhost:8000/itinerary/book', itinerary)
+    bookItinerary = (username, itinerary) => {
+        return this.$http.post('http://localhost:8000/itinerary/book/' + username, itinerary)
     }
 
     searchForItinerary = (departure, destination) => {

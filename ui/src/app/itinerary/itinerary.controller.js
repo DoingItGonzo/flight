@@ -9,7 +9,7 @@ class ItineraryController {
         this.globalService = globalService
         this.state = $state
         this.searchService = searchService
-        this.mapService = mapService
+        this.mapService = mapService 
 
     }
 
@@ -18,13 +18,14 @@ class ItineraryController {
     //     // this.state.go('result.map')
     // }
 
-    // book = () => {
-    //     this.searchService.bookItinerary(this.itinerary).then((done) => {
-    //         this.boundItineraries.flights.forEach(flight => {
-
-    //         })
-    //     })
-    // }
+    book = () => {
+        this.searchService.bookItinerary(this.globalService.credentials.username, this.boundItineraries).then((done) => {
+            console.log(done.data)
+        })
+    }
+    returnToSearch = () => {
+        this.state.go('search.map')
+    }
 }
 
 export default ItineraryController

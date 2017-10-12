@@ -29,9 +29,9 @@ public class ItineraryController {
 		return itineraryService.getAllClientItineraries(username);
 	}
 	
-	@PostMapping("book")
-	public Itinerary bookItinerary(@RequestBody Itinerary itinerary) {
-		return itineraryService.bookItinerary(itinerary);
+	@PostMapping("book/{username}")
+	public Itinerary bookItinerary(@PathVariable String username, @RequestBody Itinerary itinerary) {
+		return itineraryService.bookItinerary(username, itinerary);
 	}
 	
 	@GetMapping("{id}")

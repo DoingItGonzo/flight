@@ -145,6 +145,20 @@ a {
     border: 1px solid rgba(79, 71, 71, 0.98);
 }
 
+.flight-title {
+    display: flex;
+    align-items: center;
+    justify-content: center:
+    
+    
+}
+
+.flight-box {
+    border: 2px solid rgba(79, 71, 71, 0.98);
+    /* display: flex;
+    justify-content: left; */
+}
+
 /* .body {
     background-color: rgba(79, 71, 71, 0.98);
 } */

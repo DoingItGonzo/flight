@@ -1,6 +1,8 @@
-<div>
-<p>{{mapController.testFlight.origin.city}}></p>
-<p>{{mapController.testFlight.destination.city}}></p>
-<p>{{mapController.testFlight.offset}}></p>
-<p>{{mapController.testFlight.flightTime}}></p>
+<div class="container flight-box">
+        <div class="panel panel-default">
+<p>Leaving From: {{flightDisplayController.flights.origin}}</p>
+<p>Arriving At: {{flightDisplayController.flights.destination}}</p>
+<p>Departure Time: {{flightDisplayController.flights.offset}}</p>
+<p>Flight Duration: {{flightDisplayController.flights.flightTime}}</p>
+        </div>
 </div>

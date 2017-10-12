@@ -1,9 +1,9 @@
 import flightComponent from './flight.component.js'
-import MapController from './../map/map.component.js'
+import FlightDisplayController from './flight.controller.js'
 
 export default
     angular
-        .module('flight.flight', [])
+        .module('flight.flights', [])
         .component('flightComponent', flightComponent)
-        .controller('mapController', MapController)
+        .controller('flightDisplayController', FlightDisplayController)
         .name

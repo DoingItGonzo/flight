@@ -77,9 +77,9 @@ export default
         url: '/itinerary',
         component: 'itineraryComponent'
       }
-      const flightState = {
-        name: 'flightState',
-        url: '/flightState',
+      const flightListState = {
+        name: 'flightListState',
+        url: '/flightList',
         component: 'flightComponent'
       }
 
@@ -110,6 +110,7 @@ export default
             console.log(stateParams.departure)
             console.log(stateParams.destination)
             return searchService.searchForItinerary(stateParams.departure, stateParams.destination).then((done) => {
+                console.log(done.data)
                 return done.data
             })
         }]
@@ -123,7 +124,7 @@ export default
       stateProvider.state(nestedMapState)
       stateProvider.state(signInMapState)
       stateProvider.state(itineraryState)
-      stateProvider.state(flightState)
+      stateProvider.state(flightListState)
       stateProvider.state(itineraryMapState)
       stateProvider.state(searchResultState)
 
